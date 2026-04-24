@@ -1,0 +1,427 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.container { padding: 1rem 0; }
+.section-header {
+  display: flex; align-items: center; gap: 10px;
+  margin: 2rem 0 1rem;
+}
+.section-badge {
+  font-size: 13px; font-weight: 500; padding: 4px 14px;
+  border-radius: 20px; white-space: nowrap;
+  border: 0.5px solid;
+}
+.section-line { flex: 1; height: 0.5px; background: var(--color-border-tertiary); }
+.card {
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  padding: 1rem 1.25rem;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.card:hover { border-color: var(--color-border-secondary); }
+.card.open { border-color: var(--color-border-primary); }
+.card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.card-left { flex: 1; }
+.bunpo { font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+.meaning { font-size: 13px; color: var(--color-text-secondary); }
+.arrow { font-size: 13px; color: var(--color-text-tertiary); transition: transform 0.2s; margin-top: 2px; flex-shrink: 0; }
+.card.open .arrow { transform: rotate(90deg); }
+.card-body { display: none; margin-top: 14px; border-top: 0.5px solid var(--color-border-tertiary); padding-top: 14px; }
+.card.open .card-body { display: block; }
+
+.detail-block { margin-bottom: 12px; }
+.detail-label {
+  font-size: 11px; font-weight: 500; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--color-text-tertiary);
+  margin-bottom: 4px;
+}
+.detail-text { font-size: 14px; color: var(--color-text-primary); line-height: 1.6; }
+.example-jp { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 2px; }
+.example-es { font-size: 13px; color: var(--color-text-tertiary); font-style: italic; }
+.tip-box {
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius-md);
+  padding: 10px 14px;
+  font-size: 13px; color: var(--color-text-secondary);
+  margin-top: 8px; line-height: 1.5;
+}
+.memo {
+  font-size: 13px; font-weight: 500;
+  background: var(--color-background-info);
+  color: var(--color-text-info);
+  border-radius: var(--border-radius-md);
+  padding: 8px 12px;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+.diff-box {
+  border-left: 2px solid;
+  border-radius: 0;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+</style>
+
+<div class="container">
+
+<div class="section-header">
+  <div class="section-badge" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC;">普通形（だ）</div>
+  <div class="section-line"></div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+  <div class="card-header">
+    <div class="card-left">
+      <div class="bunpo">～といえば / ～というと</div>
+      <div class="meaning">Hablando de… / A propósito de…</div>
+    </div>
+    <div class="arrow">▶</div>
+  </div>
+  <div class="card-body">
+    <div class="detail-block">
+      <div class="detail-label">¿Cómo funciona?</div>
+      <div class="detail-text">Introduce un tema mencionado antes y añade información relacionada. Es como decir "ya que hablamos de X, eso me recuerda que…" Suena natural en conversación y también sirve para dar definiciones o asociaciones.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Ejemplo</div>
+      <div class="example-jp">土曜日といえば、モニさんの誕生日でもありますね。</div>
+      <div class="example-es">Hablando del sábado, también es el cumpleaños de Moni.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Consejo</div>
+      <div class="tip-box">Imagínate que alguien menciona "verano" y tú respondes: "Ah, verano といえば, ¡helado!" — es una asociación natural que el hablante conecta al tema.</div>
+    </div>
+    <div class="memo">💡 Oración clave: "X といえば、Yだ" → X me recuerda Y.</div>
+  </div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+  <div class="card-header">
+    <div class="card-left">
+      <div class="bunpo">～をめぐって / ～をめぐり / ～をめぐる</div>
+      <div class="meaning">En torno a… / Alrededor del tema de…</div>
+    </div>
+    <div class="arrow">▶</div>
+  </div>
+  <div class="card-body">
+    <div class="detail-block">
+      <div class="detail-label">¿Cómo funciona?</div>
+      <div class="detail-text">Indica que hay discusión, debate, conflicto o distintas opiniones que giran en torno a un tema central. El sustantivo que lo precede es el punto de controversia.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Ejemplo</div>
+      <div class="example-jp">メキシコの大統領の選挙をめぐって、色々な意見が出ている。</div>
+      <div class="example-es">En torno a las elecciones presidenciales de México, han surgido diversas opiniones.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Conjugación con N</div>
+      <div class="tip-box">N + をめぐって (verbo/fin de oración) / をめぐり (forma media) / をめぐる + N (modifica sustantivo)</div>
+    </div>
+    <div class="memo">💡 Piénsalo como "círculo de debate alrededor de X"</div>
+  </div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+  <div class="card-header">
+    <div class="card-left">
+      <div class="bunpo">～を契機に（して）/ ～をけいきとして</div>
+      <div class="meaning">Tomando X como oportunidad / A raíz de…</div>
+    </div>
+    <div class="arrow">▶</div>
+  </div>
+  <div class="card-body">
+    <div class="detail-block">
+      <div class="detail-label">¿Cómo funciona?</div>
+      <div class="detail-text">Un evento se convierte en el punto de inflexión que provoca un cambio. Tiene un tono más formal y literario. Indica que algo se usó como "oportunidad" o "detonador" para un cambio significativo.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Ejemplo</div>
+      <div class="example-jp">湖の魚が全部死んだことを契機に、環境を考えた暮らし方に注目が集まっている。</div>
+      <div class="example-es">A raíz de que todos los peces del lago murieron, se comenzó a prestar atención a un estilo de vida consciente del medio ambiente.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Diferencia con をきっかけに</div>
+      <div class="diff-box" style="border-color:#9FE1CB;">契機 es más formal y periodístico. きっかけ es más cotidiano y personal. Ambos hablan de un "detonador" de cambio, pero la formalidad cambia.</div>
+    </div>
+    <div class="memo">💡 契機 = "la chispa que cambió todo" (tono formal)</div>
+  </div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+  <div class="card-header">
+    <div class="card-left">
+      <div class="bunpo">～上の / ～上</div>
+      <div class="meaning">Por motivos de… / Desde el punto de vista de…</div>
+    </div>
+    <div class="arrow">▶</div>
+  </div>
+  <div class="card-body">
+    <div class="detail-block">
+      <div class="detail-label">¿Cómo funciona?</div>
+      <div class="detail-text">Expresa una razón o perspectiva desde un campo o área (salud, educación, seguridad, etc.). 上の modifica un sustantivo; 上 va al final sin 의.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Ejemplo</div>
+      <div class="example-jp">健康上の理由で、激しい運動はできません。</div>
+      <div class="example-es">Por motivos de salud, no puedo hacer ejercicio intenso.</div>
+      <div style="margin-top:6px;" class="example-jp">この本は、教育上、子どもにはよくない。</div>
+      <div class="example-es">Este libro, desde el punto de vista educativo, no es bueno para niños.</div>
+    </div>
+    <div class="memo">💡 N + 上(の) = "desde la perspectiva de N"</div>
+  </div>
+</div>
+
+
+<div class="section-header" style="margin-top:2.5rem;">
+  <div class="section-badge" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5;">辞書形</div>
+  <div class="section-line"></div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+  <div class="card-header">
+    <div class="card-left">
+      <div class="bunpo">～べきだ / ～べきではない</div>
+      <div class="meaning">Se debería / No se debería (recomendación moral)</div>
+    </div>
+    <div class="arrow">▶</div>
+  </div>
+  <div class="card-body">
+    <div class="detail-block">
+      <div class="detail-label">¿Cómo funciona?</div>
+      <div class="detail-text">Expresa lo que es moralmente correcto o esperado socialmente. Es más fuerte que ほうがいい — implica obligación ética o norma social, no solo consejo suave.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Ejemplo</div>
+      <div class="example-jp">初めて会った人に、悪い言葉を使うべきではない。</div>
+      <div class="example-es">No se debería usar palabras groseras con alguien que acabas de conocer.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Diferencia clave con ほうがいい</div>
+      <div class="diff-box" style="border-color:#AFA9EC;">べき = deber moral fuerte ("deberías", "está mal no hacerlo"). ほうがいい = recomendación suave ("mejor si haces esto").</div>
+    </div>
+    <div class="memo">💡 "べき" suena como tus padres diciéndote lo que es correcto.</div>
+  </div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+  <div class="card-header">
+    <div class="card-left">
+      <div class="bunpo">～ほど～ない</div>
+      <div class="meaning">No hay nada tan… como… (comparación subjetiva)</div>
+    </div>
+    <div class="arrow">▶</div>
+  </div>
+  <div class="card-body">
+    <div class="detail-block">
+      <div class="detail-label">¿Cómo funciona?</div>
+      <div class="detail-text">Establece que X es el máximo de una cualidad en comparación subjetiva. La estructura niega que algo iguale o supere a X en esa cualidad.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Ejemplo</div>
+      <div class="example-jp">TPにモニさんほどきれいな人はいない。</div>
+      <div class="example-es">En TP no hay nadie tan bonita como Moni.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Diferencia con 最も / 一番</div>
+      <div class="diff-box" style="border-color:#FAC775;">最も/一番 son hechos más objetivos. ～ほど～ない expresa la opinión personal del hablante con mayor énfasis emocional.</div>
+    </div>
+    <div class="memo">💡 X ほど Y はない = "nada llega al nivel de X en cuanto a Y"</div>
+  </div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+  <div class="card-header">
+    <div class="card-left">
+      <div class="bunpo">～（より）ほかない / ほかしかたがない</div>
+      <div class="meaning">No hay otra opción que… / No queda más que…</div>
+    </div>
+    <div class="arrow">▶</div>
+  </div>
+  <div class="card-body">
+    <div class="detail-block">
+      <div class="detail-label">¿Cómo funciona?</div>
+      <div class="detail-text">Expresa que dada la situación, solo existe una opción posible. Tiene un tono de resignación o inevitabilidad. Muy común en situaciones de emergencia o sin alternativa.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Ejemplo</div>
+      <div class="example-jp">燃料が足りないなら、着陸するよりほかない。</div>
+      <div class="example-es">Si no hay suficiente combustible, no queda más que aterrizar.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Diferencia con しかない</div>
+      <div class="diff-box" style="border-color:#9FE1CB;">しかない es la versión más coloquial y usada. よりほかない / ほかしかたがない tienen un tono más formal y dramático.</div>
+    </div>
+    <div class="memo">💡 "No hay Plan B — solo esto."</div>
+  </div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+  <div class="card-header">
+    <div class="card-left">
+      <div class="bunpo">～に伴って / ～に伴い / ～にともなう</div>
+      <div class="meaning">Junto con… / A medida que X, también Y…</div>
+    </div>
+    <div class="arrow">▶</div>
+  </div>
+  <div class="card-body">
+    <div class="detail-block">
+      <div class="detail-label">¿Cómo funciona?</div>
+      <div class="detail-text">Expresa que cuando X cambia, Y cambia en paralelo como consecuencia natural. Ambos eventos ocurren juntos y están causalmente ligados. Tono formal, usado mucho en noticias y reportes.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Ejemplo</div>
+      <div class="example-jp">感染拡大に伴って、海外からの入国を制限することになった。</div>
+      <div class="example-es">Junto con la expansión de los contagios, se restringió la entrada desde el extranjero.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Diferencia con につれて</div>
+      <div class="diff-box" style="border-color:#85B7EB;">につれて también habla de cambio paralelo, pero es más gradual ("a medida que pasa el tiempo…"). に伴って puede ser más inmediato y causal.</div>
+    </div>
+    <div class="memo">💡 Causa に伴って resultado — los dos van de la mano.</div>
+  </div>
+</div>
+
+
+<div class="section-header" style="margin-top:2.5rem;">
+  <div class="section-badge" style="background:#FAECE7;color:#712B13;border-color:#F09995;">ナイ形</div>
+  <div class="section-line"></div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+  <div class="card-header">
+    <div class="card-left">
+      <div class="bunpo">～にざるを得ない</div>
+      <div class="meaning">Tengo que… aunque no quiera (obligación no deseada)</div>
+    </div>
+    <div class="arrow">▶</div>
+  </div>
+  <div class="card-body">
+    <div class="detail-block">
+      <div class="detail-label">¿Cómo funciona?</div>
+      <div class="detail-text">Expresa que el hablante se ve forzado a hacer algo en contra de su voluntad. La clave es que NO quiere hacerlo, pero las circunstancias lo obligan. Forma irregular: する → せざるを得ない.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Ejemplo</div>
+      <div class="example-jp">パソコンを買うために、二年間貯金せざるを得なかった。</div>
+      <div class="example-es">Para comprar la computadora, no tuve más remedio que ahorrar durante dos años.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Diferencia con なければならない</div>
+      <div class="diff-box" style="border-color:#F09995;">なければならない = obligación general ("hay que hacerlo"). ざるを得ない = obligación con resistencia interna ("no quiero pero no tengo opción").</div>
+    </div>
+    <div class="memo">💡 ざるを得ない = "me duele decirlo, pero no hay alternativa."</div>
+  </div>
+</div>
+
+
+<div class="section-header" style="margin-top:2.5rem;">
+  <div class="section-badge" style="background:#E6F1FB;color:#0C447C;border-color:#85B7EB;">タ形</div>
+  <div class="section-line"></div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+  <div class="card-header">
+    <div class="card-left">
+      <div class="bunpo">～（っ）きり / ～（っ）きりだ</div>
+      <div class="meaning">Desde que hizo X, continúa así sin cambio</div>
+    </div>
+    <div class="arrow">▶</div>
+  </div>
+  <div class="card-body">
+    <div class="detail-block">
+      <div class="detail-label">¿Cómo funciona?</div>
+      <div class="detail-text">Después de una acción (en タ形), el estado resultante permanece sin cambio hasta ahora. Implica que algo quedó inconcluso o que no hubo continuación esperada. Similar en concepto a ～まま pero con énfasis en la falta de acción posterior.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Ejemplo</div>
+      <div class="example-jp">ウェブコースに入ったきり、内容が何かも見ていない。</div>
+      <div class="example-es">Desde que entré al curso online, ni siquiera he visto de qué trata.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Diferencia con ～まま</div>
+      <div class="diff-box" style="border-color:#85B7EB;">まま = "tal como está" (enfatiza el estado). きり = "desde aquella acción, nada más" (enfatiza la falta de cambio o continuación).</div>
+    </div>
+    <div class="memo">💡 "Lo hice… y ya no pasó nada más." = きり</div>
+  </div>
+</div>
+
+
+<div class="section-header" style="margin-top:2.5rem;">
+  <div class="section-badge" style="background:#EAF3DE;color:#27500A;border-color:#97C459;">テ形・Nの</div>
+  <div class="section-line"></div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+  <div class="card-header">
+    <div class="card-left">
+      <div class="bunpo">～最中に</div>
+      <div class="meaning">En pleno proceso de… / Justo mientras…</div>
+    </div>
+    <div class="arrow">▶</div>
+  </div>
+  <div class="card-body">
+    <div class="detail-block">
+      <div class="detail-label">¿Cómo funciona?</div>
+      <div class="detail-text">Indica que algo inesperado o interrumpido ocurre justo en el momento más activo o central de otra acción. El verbo principal implica que la primera acción estaba en su punto máximo. Suele acompañar eventos sorpresivos o inconvenientes.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Ejemplo</div>
+      <div class="example-jp">授業の不平を言っている最中に、その授業の先生が隣のドアから出てきた。</div>
+      <div class="example-es">Justo mientras me quejaba de la clase, el maestro de esa clase salió por la puerta de al lado.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Diferencia con ているとき</div>
+      <div class="diff-box" style="border-color:#97C459;">ているとき = simplemente "mientras hacía X". 最中に = "en el mero momento más intenso de X" — implica que era el peor/más inoportuno momento posible.</div>
+    </div>
+    <div class="memo">💡 最中に = el peor momento posible para que algo pasara.</div>
+  </div>
+</div>
+
+
+<div class="section-header" style="margin-top:2.5rem;">
+  <div class="section-badge" style="background:#FAEEDA;color:#633806;border-color:#EF9F27;">マス形</div>
+  <div class="section-line"></div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+  <div class="card-header">
+    <div class="card-left">
+      <div class="bunpo">～かけだ / ～かけの / ～かける</div>
+      <div class="meaning">A medias… / En proceso incompleto de…</div>
+    </div>
+    <div class="arrow">▶</div>
+  </div>
+  <div class="card-body">
+    <div class="detail-block">
+      <div class="detail-label">¿Cómo funciona?</div>
+      <div class="detail-text">Expresa que una acción fue iniciada pero no completada — quedó a la mitad. Implica que se abandonó en el proceso. かけの modifica sustantivos; かける se usa como verbo.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Ejemplo</div>
+      <div class="example-jp">書きかけのレポートを提出しました。</div>
+      <div class="example-es">Entregué el reporte que estaba a medio escribir.</div>
+      <div style="margin-top:6px;" class="example-jp">テーブルに食べかけのピザを置いたまま、弟は出かけた。</div>
+      <div class="example-es">Mi hermano salió dejando la pizza a medias sobre la mesa.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-label">Diferencia con ている途中</div>
+      <div class="diff-box" style="border-color:#EF9F27;">途中 = en medio del proceso (puede terminar). かけ = empezado pero detenido/abandonado antes de terminar.</div>
+    </div>
+    <div class="memo">💡 かけ = "a medias y se quedó así"</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function toggle(card) {
+  card.classList.toggle('open');
+}
+</script>
